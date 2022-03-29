@@ -1491,7 +1491,7 @@ export const walletApi = apiWithTag.injectEndpoints({
       query: ({ walletId, newList, numVerificationsRequired }) => ({
         command: 'updateRecoveryIds',
         service: DID,
-        args: [walletId],
+        args: [walletId, newList, numVerificationsRequired],
       }),
       invalidatesTags: (_result, _error, { walletId }) => [
         { type: 'Wallets', id: walletId },
