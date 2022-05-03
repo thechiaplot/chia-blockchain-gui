@@ -44,7 +44,7 @@ export const daemonApi = apiWithTag.injectEndpoints({
         },
       }]),
     }),
-    
+
     startService: build.mutation<boolean, {
       service: ServiceName;
       testing?: boolean,
@@ -77,11 +77,11 @@ export const daemonApi = apiWithTag.injectEndpoints({
       transformResponse: (response: any) => response?.isRunning,
       providesTags: (_result, _err, { service }) => [{ type: 'ServiceRunning', id: service }],
     }),
-  
+
     setKeyringPassphrase: build.mutation<boolean, {
-      currentPassphrase?: string, 
+      currentPassphrase?: string,
       newPassphrase?: string;
-      passphraseHint?: string, 
+      passphraseHint?: string,
       savePassphrase?: boolean,
     }>({
       query: ({ currentPassphrase, newPassphrase, passphraseHint, savePassphrase }) => ({
@@ -91,7 +91,7 @@ export const daemonApi = apiWithTag.injectEndpoints({
       }),
       invalidatesTags: () => ['KeyringStatus'],
       transformResponse: (response: any) => response?.success,
-    }), 
+    }),
 
     removeKeyringPassphrase: build.mutation<boolean, {
       currentPassphrase: string;
@@ -143,7 +143,7 @@ export const daemonApi = apiWithTag.injectEndpoints({
         const availablePlotters: PlotterMap<PlotterName, Plotter> = {};
 
         plotterNames.forEach((plotterName) => {
-          const { 
+          const {
             displayName = plotterName,
             version,
             installed,
@@ -163,7 +163,7 @@ export const daemonApi = apiWithTag.injectEndpoints({
             },
           };
         });
-        
+
         return availablePlotters;
       },
       // providesTags: (_result, _err, { service }) => [{ type: 'ServiceRunning', id: service }],
@@ -181,9 +181,16 @@ export const daemonApi = apiWithTag.injectEndpoints({
       // providesTags: (_result, _err, { service }) => [{ type: 'ServiceRunning', id: service }],
     }),
     startPlotting: build.mutation<boolean, PlotAdd>({
-      query: ({ 
+      query: ({
         bladebitDisableNUMA,
         bladebitWarmStart,
+        bladebitNoCpuAffinity,
+        bladebit2Cache,
+        bladebit2F1Threads,
+        bladebit2FpThreads,
+        bladebit2CThreads,
+        bladebit2P2Threads,
+        bladebit2P3Threads,
         c,
         delay,
         disableBitfieldPlotting,
@@ -234,6 +241,13 @@ export const daemonApi = apiWithTag.injectEndpoints({
           madmaxNumBucketsPhase3,
           madmaxTempToggle,
           madmaxThreadMultiplier,
+          bladebitNoCpuAffinity,
+          bladebit2Cache,
+          bladebit2F1Threads,
+          bladebit2FpThreads,
+          bladebit2CThreads,
+          bladebit2P2Threads,
+          bladebit2P3Threads,
         ],
       }),
       transformResponse: (response: any) => response?.success,
@@ -242,7 +256,7 @@ export const daemonApi = apiWithTag.injectEndpoints({
   }),
 });
 
-export const { 
+export const {
   useDaemonPingQuery,
   useGetKeyringStatusQuery,
   useStartServiceMutation,
