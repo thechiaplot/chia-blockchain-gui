@@ -17,9 +17,9 @@ export default class Service extends EventEmitter {
   private _readyPromise: Promise<null> | undefined;
 
   constructor(
-    name: ServiceName, 
-    client: Client, 
-    options: Options = {}, 
+    name: ServiceName,
+    client: Client,
+    options: Options = {},
     onInit: () => Promise<void>,
   ) {
     super();
@@ -33,7 +33,7 @@ export default class Service extends EventEmitter {
     if (!skipAddService) {
       client.addService(this);
     }
-    
+
     client.on('message', this.handleMessage);
 
     this._readyPromise = new Promise(async (resolve, reject) => {
@@ -85,7 +85,7 @@ export default class Service extends EventEmitter {
   processMessage(message: Message) {
     if (message.command) {
       this.emit(message.command, message.data, message);
-    }    
+    }
   }
 
   async command(command: string, data: Object = {}, ack = false, timeout?: number, disableFormat?: boolean): Promise<any> {
@@ -116,7 +116,7 @@ export default class Service extends EventEmitter {
   }
 
   onCommand(
-    command: string, 
+    command: string,
     callback: (data: any, message: Message) => void,
     processData?: (data: any) => any,
   ): () => void {
