@@ -11,10 +11,12 @@
     },
     "scripts": {
         "start": "npm run electron",
+        "debug:electron": "cross-env NODE_ENV=development webpack --config webpack.electron.babel.ts --mode development && electron --trace-warnings --inspect=5858 .",
         "dev:electron": "cross-env NODE_ENV=development webpack --config webpack.electron.babel.ts --mode development && electron .",
         "dev:react": "cross-env NODE_ENV=development NODE_OPTIONS=--max_old_space_size=8192 webpack serve --config webpack.react.babel.ts --mode development",
         "dev": "npm run locale && concurrently --kill-others \"npm run dev:react\" \"npm run dev:electron\"",
         "dev:fast": "concurrently --kill-others \"npm run dev:react\" \"npm run dev:electron\"",
+        "debug:fast": "concurrently --kill-others \"npm run dev:react\" \"npm run debug:electron\"",
         "build:electron": "cross-env NODE_ENV=production webpack --config ./webpack.electron.babel.ts",
         "build:react": "cross-env NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 webpack --config ./webpack.react.babel.ts",
         "build": "npm run locale && npm run build:electron && npm run build:react",

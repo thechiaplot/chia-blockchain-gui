@@ -22,6 +22,7 @@ const StyledPreviewContainer = styled(Flex)`
 const StyledCard = styled(Card)`
   width: 300px;
   height: 362px;
+  border-radius: 8px;
   display: flex;
 `;
 
@@ -43,6 +44,7 @@ export default function NFTOfferPreview(props: NFTOfferPreviewProps) {
 
   const cardContentElem = (function () {
     if (isLoadingNFT) {
+      console.log('loading nft');
       return (
         <Flex
           flexDirection="column"
@@ -60,6 +62,7 @@ export default function NFTOfferPreview(props: NFTOfferPreviewProps) {
         </Flex>
       );
     } else if (launcherId && nft) {
+      console.log('have nft info');
       return (
         <NFTCard
           nft={nft}
@@ -72,7 +75,8 @@ export default function NFTOfferPreview(props: NFTOfferPreviewProps) {
           }
         />
       );
-    } else if (error) {
+    } else if (launcherId && error) {
+      console.log('have error');
       return (
         <Flex
           flexDirection="column"
@@ -90,20 +94,23 @@ export default function NFTOfferPreview(props: NFTOfferPreviewProps) {
         </Flex>
       );
     } else {
-      <Flex
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        flexGrow={1}
-        gap={1}
-        style={{
-          wordBreak: 'break-all',
-        }}
-      >
-        <Typography variant="h6">
-          <Trans>NFT not specified</Trans>
-        </Typography>
-      </Flex>;
+      console.log('else case');
+      return (
+        <Flex
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          flexGrow={1}
+          gap={1}
+          style={{
+            wordBreak: 'break-all',
+          }}
+        >
+          <Typography variant="h6">
+            <Trans>NFT not specified</Trans>
+          </Typography>
+        </Flex>
+      );
     }
   })();
 

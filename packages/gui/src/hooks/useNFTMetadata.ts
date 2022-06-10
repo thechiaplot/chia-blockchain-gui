@@ -30,7 +30,11 @@ export default function useNFTMetadata(nft: NFTInfo) {
       }
 
       const content = await getRemoteFileContent(uri, MAX_FILE_SIZE);
+      console.log('content:');
+      console.log(content);
       const metadata = JSON.parse(content);
+      console.log('metadata:');
+      console.log(metadata);
 
       setMetadata(metadata);
     } catch (error: any) {
