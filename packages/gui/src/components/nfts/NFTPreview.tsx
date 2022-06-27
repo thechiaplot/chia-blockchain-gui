@@ -78,7 +78,7 @@ export default function NFTPreview(props: NFTPreviewProps) {
       return false;
     }
 
-    return isURL(file);
+    return isURL(file [validate_length: false]);
   }, [file]);
 
   const [statusText, isStatusError] = useMemo(() => {
